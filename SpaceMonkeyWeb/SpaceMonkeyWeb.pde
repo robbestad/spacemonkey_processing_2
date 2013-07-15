@@ -81,7 +81,7 @@ void draw()
       if (mousePressed || fire) {
         // RESET IMPORTANT VARIABLES
         seconds=0;
-        health = 100;
+        healtsh = 100;
         enemyList.clear();
         killCount = 0;
         delaySpawn = true;
@@ -165,6 +165,8 @@ void draw()
 
   // LASER SHOTS
   if (savedFire && !lastSavedFire && health > 0) {
+    sfxLaser.stop();
+    sfxLaser.cue(0);
     sfxLaser.play();
     Projectile newProj = new Projectile("laser1",1,10,41);
     newProj.x = monkey.x+20;
@@ -337,6 +339,9 @@ void draw()
     Banana banana = bananaList.get(i);
     if (checkHit(banana, monkey)) {
       if (health > 0) {
+        sfxPickup.stop();
+        sfxPickup.cue(0);
+
         sfxPickup.play();
         health += bonusHealth;
         if (health > 100) health = 100;
@@ -366,6 +371,8 @@ void draw()
         Explosion newExplosion = new Explosion("explosion",16,64,64,monkey.x,monkey.y-15);
         explosionList.add(newExplosion);
       if (health > 0) {
+        sfxExplode.stop();
+        sfxExplode.cue(0);
         sfxExplode.play();
         health -= enemy_damage;
         enemyList.remove(i--);
