@@ -6,14 +6,14 @@ void setup()
   noSmooth();
   
   maxim = new Maxim(this);
- //musicPlayer = maxim.loadFile("standoff.wav");
- //  musicPlayer.setLooping(true);
- // musicPlayer.volume(0.8);
+  musicPlayer = maxim.loadFile("standoff.wav");
+  musicPlayer.setLooping(true);
+  musicPlayer.volume(0.8);
  
   sfxLaser=maxim.loadFile("laser.wav");
   sfxLaser.setLooping(false);
  
-  sfxExplode=maxim.loadFile("explode2.wav");
+  sfxExplode=maxim.loadFile("explosion.wav");
   sfxExplode.setLooping(false);
   
   sfxPickup=maxim.loadFile("pickup.wav");
@@ -92,11 +92,11 @@ void draw()
       }
     else 
     fill(button_idle_color);    
-    rect(button_x0, startbox_y1, button_w, button_h);
+    ellipse(button_x0+100, startbox_y1+37, button_w, button_h);
     fill(#000000);
     textAlign(CENTER);
-    text("Welcome to SPACE MONKEY", button_x0-10, startbox_y1+4, button_w, button_h);
-    text("Move with [arrow] keys", button_x0-5, startbox_y1+18, button_w, button_h);
+    //text("Welcome to SPACE MONKEY", button_x0-10, startbox_y1+4, button_w, button_h);
+    text("Move with [arrow] keys", button_x0-5, startbox_y1+16, button_w, button_h);
     text("[space] to shoot", button_x0-5, startbox_y1+32, button_w, button_h);
     text("Click here to play", button_x0-5, startbox_y1+48, button_w, button_h);
     
@@ -136,7 +136,7 @@ void draw()
   }
   
     
-  //musicPlayer.play();
+  musicPlayer.play();
   pushMatrix();
    parallax(stars, pos_stars, vel_stars, direction);
    parallax(dust, pos_dust, vel_dust, direction);
