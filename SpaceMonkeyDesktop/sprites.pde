@@ -14,8 +14,11 @@ class Sprites {
 }
 
 class Enemy extends Sprites {
+  private int alientype=0;
+  
   Enemy(String imgname){
     spriteimg = loadImages(imgname, ".png", 1);
+    if(imgname=="alien1")alientype=1;
   }
   
   public void disp(){
@@ -30,9 +33,15 @@ class Enemy extends Sprites {
   
   //Use the members to move the object
   public void move() {
-    tx = (tx + v_x_timestep) % TWO_PI;
+    if(alientype==1){
+    if((seconds%2)==1) y -= v_y;
+    else y += v_y*3;
+    }
+    else {
+      y += v_y*3;
+    }
+    tx=tx+(v_x_timestep/4)%TWO_PI;
     x = (int)(x_0 + v_x_amp*sin(tx));
-    y += v_y;
   }
 }
 
@@ -62,6 +71,31 @@ class Projectile extends Sprites {
   }
 }
 
+
+// shoots back now...
+class EnemyProjectile extends Sprites {
+  private int currentFrame=0;
+  private int numFrames=0;
+
+  EnemyProjectile(String imgname, int frames, int imwidth, int imheight){
+    spriteimg = loadImages(imgname, ".png", frames);
+    w=imwidth;
+    h=imheight;
+   numFrames=frames;
+  }
+ 
+  public void disp(){
+   image(spriteimg[(int)currentFrame],x, y,w, h);
+   currentFrame++;
+   if(currentFrame>=numFrames)currentFrame=0;
+  }
+  public int v_x = 0, v_y = 10;
+  //Use the members to move the object
+  public void move() {
+    this.x += this.v_x;
+    this.y += v_y;
+  }
+}
 
 // MONKEY (PLAYER)
 class Monkey extends Sprites {
@@ -109,6 +143,7 @@ class Asteroid extends Sprites {
   public float v_x_amp = 0f; //amplitude of enemy's x movement
   public float v_x_timestep = 0f; //used to move the enemy horizontally
   public float tx = 0f; //used to store the enemy's current position
+  public int health = 1000;
   
   //Use the members to move the object
   public void move() {
@@ -138,7 +173,7 @@ class Banana extends Sprites {
   
   //Use the members to move the object
   public void move() {
-    tx = (tx + v_x_timestep) % TWO_PI;
+    tx = (tx + v_x_timestep/2) % TWO_PI;
     x = (int)(x_0/2 + v_x_amp*sin(tx));
     y += v_y*1.8;
   }
@@ -185,13 +220,15 @@ class Explosion extends Sprites {
     h=imheight;
     x=xpos;
     y=ypos;
-   numFrames=frames;
+    numFrames=frames;
+    currentFrame=0;
+    killed=0;
   }
  
   public void disp(){
    image(spriteimg[(int)currentFrame],x, y,w, h);
    currentFrame++;
-   if(currentFrame>=numFrames){currentFrame=0;killed=1;}
+   if(currentFrame>=numFrames){currentFrame=15;killed=1;}
   }
   
 }  

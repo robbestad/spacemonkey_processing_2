@@ -3,7 +3,9 @@ Maxim maxim;
 AudioPlayer musicPlayer;
 AudioPlayer sfxLaser;
 AudioPlayer sfxExplode;
+AudioPlayer sfxExplodeSmall;
 AudioPlayer sfxPickup;
+
 
 // first run
 boolean game_started=false;
@@ -74,6 +76,7 @@ boolean delaySpawn = true;
 //Projectile properties
 final int player_shot_w = 10, player_shot_h = 41;
 final int player_shot_v_x = 0, player_shot_v_y = -6;
+int coolDown=500;
 
 //Restart button properties
 final int button_w = 200;
@@ -86,6 +89,7 @@ final int startbox_y1=button_y0+300;
 final color button_idle_color = #00FF00;
 final color button_over_color = #FFFFFF;
 
+
 //Player and other entities
 Monkey monkey;
 Sprites healthBar;
@@ -95,8 +99,10 @@ Banana banana;
 Stars star;
 Explosion explosion;
 Dusthit dusthit;
+EnemyProjectile enemyProjectile;
 
 ArrayList<Projectile> projectileList;
+ArrayList<EnemyProjectile> enemyProjectileList;
 ArrayList<Enemy> enemyList;
 ArrayList<Asteroid> asteroidList;
 ArrayList<Banana> bananaList;

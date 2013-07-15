@@ -7,6 +7,7 @@ void setup()
   
   maxim = new Maxim(this);
   musicPlayer = maxim.loadFile("standoff.wav");
+  
   musicPlayer.setLooping(true);
   musicPlayer.volume(0.8);
  
@@ -15,6 +16,9 @@ void setup()
  
   sfxExplode=maxim.loadFile("explosion.wav");
   sfxExplode.setLooping(false);
+
+  sfxExplodeSmall=maxim.loadFile("explosion_small.wav");
+  sfxExplodeSmall.setLooping(false);
   
   sfxPickup=maxim.loadFile("pickup.wav");
   sfxPickup.setLooping(false);
@@ -41,6 +45,7 @@ void setup()
     game_s = (float)height / (float)game_h;
 
   projectileList = new ArrayList<Projectile>();
+  enemyProjectileList = new ArrayList<EnemyProjectile>();
   enemyList = new ArrayList<Enemy>();
   asteroidList = new ArrayList<Asteroid>();
 
@@ -81,7 +86,7 @@ void draw()
       if (mousePressed || fire) {
         // RESET IMPORTANT VARIABLES
         seconds=0;
-        healtsh = 100;
+        health = 100;
         enemyList.clear();
         killCount = 0;
         delaySpawn = true;
@@ -135,6 +140,7 @@ void draw()
     asteroids_maxCount = 8;
   }
   
+  coolDown-=7;
     
   musicPlayer.play();
   pushMatrix();
@@ -180,8 +186,22 @@ void draw()
   }
   
   
+  // shooot back
+  if (coolDown<0) {
+   if (enemyList.size() > 0 && enemyProjectileList .size() < 1) {
+    for (int i = 0; i < enemyList.size(); i++) {
+    Enemy enemy = enemyList.get(i);
+    EnemyProjectile newProj = new EnemyProjectile("laser1",1,10,41);
+    newProj.x = enemy.x+27;
+    newProj.y = enemy.y;
+    newProj.drawMode = CENTER;
+    enemyProjectileList.add(newProj);
+    coolDown=500;
+    }
+   }
+  }
   // width distribution
-  int[] widthdist = { 125,175,225,275,325,375,425,475,525 };
+  int[] widthdist = { 175,225,275,325,375,425,475 };
   shuffle(widthdist);
   int arraynum=widthdist.length-1;
   int randomx=0;
@@ -344,6 +364,7 @@ void draw()
 
         sfxPickup.play();
         health += bonusHealth;
+        killCount+=50;
         if (health > 100) health = 100;
         bananaList.remove(i--);
         continue;
@@ -356,6 +377,9 @@ void draw()
       if (health > 0) {
         Explosion newExplosion = new Explosion("explosion",16,64,64,monkey.x,monkey.y-50);
         explosionList.add(newExplosion);
+        sfxExplode.stop();
+        sfxExplode.cue(0);
+        sfxExplode.play();
         health -= enemy_damage*1.3;
         asteroidList.remove(i--);
         continue;
@@ -370,10 +394,10 @@ void draw()
     if (checkHit(enemy, monkey)) {
         Explosion newExplosion = new Explosion("explosion",16,64,64,monkey.x,monkey.y-15);
         explosionList.add(newExplosion);
-      if (health > 0) {
         sfxExplode.stop();
         sfxExplode.cue(0);
         sfxExplode.play();
+      if (health > 0) {
         health -= enemy_damage;
         enemyList.remove(i--);
         skipcheck=true;
@@ -383,15 +407,14 @@ void draw()
     for (int j = 0; j < projectileList.size(); j++) {
       Projectile proj = projectileList.get(j);
       if (checkHit(proj, enemy) && !skipcheck) {
-        enemyList.remove(i--);
-        projectileList.remove(j--);
-        
+        sfxExplode.stop();
+        sfxExplode.cue(0);
         sfxExplode.play();
         Explosion newExplosion = new Explosion("explosion",16,64,64,proj.x,proj.y-50);
         explosionList.add(newExplosion);
-        
+        enemyList.remove(i--);
+        projectileList.remove(j--);
         killCount+=250;
-        
       }
     }
   }
@@ -399,7 +422,32 @@ void draw()
 
 
       
-   
+   // check hit with enemy projectile
+   for (int j = 0; j < enemyProjectileList.size(); j++) {
+    EnemyProjectile proj = enemyProjectileList.get(j);
+    if (checkHit(proj, monkey)) {
+      //enemyList.remove(i--);
+      health-=25;
+      if(health<0) {
+        Explosion newExplosion = new Explosion("explosion",16,64,64,proj.x,proj.y-50);
+        explosionList.add(newExplosion);  
+        sfxExplode.stop();
+        sfxExplode.cue(0);
+        sfxExplode.play();
+      }
+      else {
+        sfxExplodeSmall.stop();
+        sfxExplodeSmall.cue(0);
+        sfxExplodeSmall.play();
+        Dusthit newHit = new Dusthit("dust",8,64,64,proj.x-20,proj.y-20);
+        dustList.add(newHit);
+      }
+      enemyProjectileList.remove(j--);
+      
+      }
+    }
+
+    
    // check hit with asteorids
    for (int i = 0; i < asteroidList.size(); i++) {
     Asteroid asteroid = asteroidList.get(i);
@@ -407,10 +455,25 @@ void draw()
       Projectile proj = projectileList.get(j);
       if (checkHit(proj, asteroid)) {
         //enemyList.remove(i--);
+        asteroid.health-=240;
+        if(asteroid.health<0) {
+          asteroidList.remove(i--);
+          Explosion newExplosion = new Explosion("explosion",16,64,64,proj.x,proj.y-50);
+          explosionList.add(newExplosion);  
+          sfxExplode.stop();
+          sfxExplode.cue(0);
+          sfxExplode.play();
+          killCount+=150;
+        }
+        else {
+          sfxExplodeSmall.stop();
+          sfxExplodeSmall.cue(0);
+          sfxExplodeSmall.play();
+          Dusthit newHit = new Dusthit("dust",8,64,64,proj.x-20,proj.y-20);
+          dustList.add(newHit);
+        }
         projectileList.remove(j--);
-        sfxExplode.play();
-        Dusthit newHit = new Dusthit("dust",8,64,64,proj.x-20,proj.y-20);
-        dustList.add(newHit);
+        
         }
       }
     }
@@ -428,6 +491,16 @@ void draw()
     proj.disp();
     if (proj.y + proj.h < 0)
       projectileList.remove(i--);
+  }
+  
+  for (int i = 0; i < enemyProjectileList.size(); i++) {
+    EnemyProjectile proj = enemyProjectileList.get(i);
+    proj.move();
+    proj.disp();
+    if (proj.y + proj.h < 0)
+      enemyProjectileList.remove(i--);
+    if (proj.y + proj.h > height)
+      enemyProjectileList.remove(i--);
   }
 
   
@@ -467,6 +540,7 @@ void draw()
     Dusthit dusthit = dustList.get(i);
     dusthit.disp();
     if(dusthit.killed==1) dustList.remove(i--);
+    
   }
 
 
