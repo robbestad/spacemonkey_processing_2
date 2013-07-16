@@ -102,9 +102,7 @@ void draw()
     ellipse(button_x0+100, startbox_y1-3, button_w, button_h+10);
     fill(#000000);
     textAlign(CENTER);
-    text("Move with [arrow] keys", button_x0, startbox_y1-23, button_w, button_h);
-    text("[space] to shoot", button_x0, startbox_y1-9, button_w, button_h);
-    text("Click here to play", button_x0, startbox_y1+7, button_w, button_h);
+    text("Click here to play", button_x0, startbox_y1-7, button_w, button_h);
     
     
   } else
@@ -1083,7 +1081,7 @@ final int player_y = (8*game_h)/10;
 final int player_x_min = 10;
 final int player_x_max = (8*game_w)/10;
 final int player_y_min = (2*game_h)/3;
-final int player_y_max = (8*game_h)/10;
+final int player_y_max = (8*game_h)/11;
 final int player_v_x = 3, player_v_y = 2;
 final color player_c = #00FFFF;
 

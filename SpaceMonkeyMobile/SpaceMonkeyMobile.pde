@@ -102,9 +102,7 @@ void draw()
     ellipse(button_x0+100, startbox_y1-3, button_w, button_h+10);
     fill(#000000);
     textAlign(CENTER);
-    text("Move with [arrow] keys", button_x0, startbox_y1-23, button_w, button_h);
-    text("[space] to shoot", button_x0, startbox_y1-9, button_w, button_h);
-    text("Click here to play", button_x0, startbox_y1+7, button_w, button_h);
+    text("Click here to play", button_x0, startbox_y1-7, button_w, button_h);
     
     
   } else
