@@ -55,13 +55,14 @@ void setup()
   explosionList = new ArrayList<Explosion>();
   dustList = new ArrayList<Dusthit>();
   
-
+  /*
   healthBar = new Sprites();
   healthBar.x = health_x;
   healthBar.y = health_y;
   healthBar.h = health_h*2;
   healthBar.drawMode = CORNER;
   healthBar.c = health_c;
+  */
 
   monkey = new Monkey("monkey",4,51,84);
   monkey.x = player_x;
@@ -493,6 +494,16 @@ void draw()
 
 
   //Move, display, and remove off-screen things
+  
+   for (int i = 0; i < starsList.size(); i++) {
+    Stars star = starsList.get(i);
+    star.move();
+    star.disp();
+    if (star.y - star.h > game_h)
+      starsList.remove(i--);
+  }
+
+  
   for (int i = 0; i < projectileList.size(); i++) {
     Projectile proj = projectileList.get(i);
     proj.move();
@@ -529,14 +540,6 @@ void draw()
   }
 
   
-   for (int i = 0; i < starsList.size(); i++) {
-    Stars star = starsList.get(i);
-    star.move();
-    star.disp();
-    if (star.y - star.h > game_h)
-      starsList.remove(i--);
-  }
-
 
   for (int i = 0; i < explosionList.size(); i++) {
     Explosion explosion = explosionList.get(i);
@@ -569,6 +572,7 @@ for (int i = 0; i < enemyList.size(); i++) {
 
   textAlign(LEFT);
   fill(#00FF00);
+  text("Health: " + health, 15, 13);
   text("Score: " + killCount, width/2-15, 13);
   
   noStroke();
