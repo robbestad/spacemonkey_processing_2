@@ -1,7 +1,7 @@
 
 void setup()
 {
-  size(320,450);
+  size(320,420);
   noStroke();
   noSmooth();
   

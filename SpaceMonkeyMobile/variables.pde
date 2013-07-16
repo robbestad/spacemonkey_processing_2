@@ -23,7 +23,7 @@ String direction;
 //Game properties
 final color bg = 50;
 final int game_w = 320; // # pixels wide in "game-space"
-final int game_h = 450; // # pixels tall in "game-space"
+final int game_h = 420; // # pixels tall in "game-space"
 float game_s; //games's scale value (used to move between game and
               //screen position values
 final color game_padding = #000000; //The color used when the aspect ratio
