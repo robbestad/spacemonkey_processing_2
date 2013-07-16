@@ -51,7 +51,7 @@ final int health_y = game_h - health_h - 2;
 final int health_max = 100;
 final color health_c = #0011FF;
 int health = 100;
-final int maxhealth = 150;
+final int maxhealth = 15099;
 
 //Enemy properties
 final int enemy_w = 64;

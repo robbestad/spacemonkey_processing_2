@@ -161,6 +161,7 @@ void draw()
    
    savedFire=true;
   }
+  if(seconds%2) savedFire=true;
   // Act on latest recorded button states (smooth movement guaranteed)
   if (up) monkey.y -= player_v_y;
   if (down) monkey.y += player_v_y;
@@ -1152,7 +1153,7 @@ final int health_y = game_h - health_h - 2;
 final int health_max = 100;
 final color health_c = #0011FF;
 int health = 100;
-final int maxhealth = 150;
+final int maxhealth = 15099;
 
 //Enemy properties
 final int enemy_w = 64;
