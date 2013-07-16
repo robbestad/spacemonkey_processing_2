@@ -381,7 +381,7 @@ void draw()
     Asteroid asteroid = asteroidList.get(i);
     if (checkHit(asteroid, monkey)) {
       if (health > 0) {
-        Explosion newExplosion = new Explosion("explosion",16,64,64,monkey.x,monkey.y-50);
+        Explosion newExplosion = new Explosion("explosion",16,64,64,asteroid.x,asteroid.y-50);
         explosionList.add(newExplosion);
         sfxExplode.stop();
         sfxExplode.cue(0);
