@@ -102,7 +102,7 @@ void draw()
     ellipse(button_x0+100, startbox_y1-3, button_w, button_h+10);
     fill(#000000);
     textAlign(CENTER);
-    text("Click here to play", button_x0, startbox_y1-7, button_w, button_h);
+    text("Tap here to play", button_x0, startbox_y1-7, button_w, button_h);
     
     
   } else
@@ -618,7 +618,7 @@ for (int i = 0; i < enemyList.size(); i++) {
     textAlign(CENTER);
     text("Oh no, you died...", button_x0, 2, button_w, button_h);
     text("Final score: "+killCount, button_x0, 17, button_w, button_h);
-    text("Click here to try again", button_x0, 32, button_w, button_h);
+    text("Tap here to try again", button_x0, 32, button_w, button_h);
     
     }
 
