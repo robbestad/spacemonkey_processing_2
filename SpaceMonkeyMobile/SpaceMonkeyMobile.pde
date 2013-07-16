@@ -161,7 +161,7 @@ void draw()
    
    savedFire=true;
   }
-  if(seconds%2) savedFire=true;
+  if(frTimer%4) savedFire=true;
   // Act on latest recorded button states (smooth movement guaranteed)
   if (up) monkey.y -= player_v_y;
   if (down) monkey.y += player_v_y;
