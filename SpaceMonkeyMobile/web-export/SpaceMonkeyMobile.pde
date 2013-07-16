@@ -77,6 +77,7 @@ void setup()
 
 void draw()
 {
+  
   background(0);
   if(!game_started){
     image(bgstart);
@@ -98,7 +99,7 @@ void draw()
       }
     else 
     fill(button_idle_color);    
-    ellipse(button_x0+100, startbox_y1-5, button_w, button_h);
+    ellipse(button_x0+100, startbox_y1-3, button_w, button_h+10);
     fill(#000000);
     textAlign(CENTER);
     text("Move with [arrow] keys", button_x0, startbox_y1-23, button_w, button_h);
@@ -612,12 +613,14 @@ for (int i = 0; i < enemyList.size(); i++) {
     else 
     textAlign(CENTER);
     //text("... after only "+seconds+" seconds", button_x0, button_y0+18, button_w, button_h);
-    ellipse(button_x0+100, startbox_y1-5, button_w, button_h);
+    ellipse(button_x0+100, 25, button_w, button_h+5);
+    rect(button_x0, 0, button_w, button_h-37);
+    
     fill(#000000);
     textAlign(CENTER);
-    text("Oh no, you died...", button_x0, startbox_y1-23, button_w, button_h);
-    text("Final score: "+killCount, button_x0, startbox_y1-9, button_w, button_h);
-    text("Click here to try again", button_x0, startbox_y1+7, button_w, button_h);
+    text("Oh no, you died...", button_x0, 2, button_w, button_h);
+    text("Final score: "+killCount, button_x0, 17, button_w, button_h);
+    text("Click here to try again", button_x0, 32, button_w, button_h);
     
     }
 
