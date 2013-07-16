@@ -98,13 +98,12 @@ void draw()
       }
     else 
     fill(button_idle_color);    
-    ellipse(button_x0+100, startbox_y1+37, button_w, button_h);
+    ellipse(button_x0+100, startbox_y1-5, button_w, button_h);
     fill(#000000);
     textAlign(CENTER);
-    //text("Welcome to SPACE MONKEY", button_x0-10, startbox_y1+4, button_w, button_h);
-    text("Move with [arrow] keys", button_x0-5, startbox_y1+16, button_w, button_h);
-    text("[space] to shoot", button_x0-5, startbox_y1+32, button_w, button_h);
-    text("Click here to play", button_x0-5, startbox_y1+48, button_w, button_h);
+    text("Move with [arrow] keys", button_x0, startbox_y1-23, button_w, button_h);
+    text("[space] to shoot", button_x0, startbox_y1-9, button_w, button_h);
+    text("Click here to play", button_x0, startbox_y1+7, button_w, button_h);
     
     
   } else
@@ -151,7 +150,11 @@ void draw()
 
    //Record button states
   getButtonStates();
-
+  if(mousePressed){
+   fire=true;
+   if(mouseX>  monkey.x)left=true;
+   else right=true;
+  }
   // Act on latest recorded button states (smooth movement guaranteed)
   if (up) monkey.y -= player_v_y;
   if (down) monkey.y += player_v_y;
