@@ -610,16 +610,15 @@ for (int i = 0; i < enemyList.size(); i++) {
         
       }
     else 
-    fill(button_idle_color);    
-    rect(button_x0, button_y0, button_w, button_h);
+    textAlign(CENTER);
+    //text("... after only "+seconds+" seconds", button_x0, button_y0+18, button_w, button_h);
+    ellipse(button_x0+100, startbox_y1-5, button_w, button_h);
     fill(#000000);
     textAlign(CENTER);
-    //killCount+=seconds*25;
-    text("Oh no, you died...", button_x0, button_y0+2, button_w, button_h);
-    text("... after only "+seconds+" seconds", button_x0, button_y0+18, button_w, button_h);
+    text("Oh no, you died...", button_x0, startbox_y1-23, button_w, button_h);
+    text("Final score: "+killCount, button_x0, startbox_y1-9, button_w, button_h);
+    text("Click here to try again", button_x0, startbox_y1+7, button_w, button_h);
     
-    text("Final score: "+killCount, button_x0, button_y0+33, button_w, button_h);
-    text("Click here to try again", button_x0, button_y0+48, button_w, button_h);
     }
 
 }
