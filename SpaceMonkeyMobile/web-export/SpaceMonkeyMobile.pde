@@ -151,9 +151,21 @@ void draw()
    //Record button states
   getButtonStates();
   if(mousePressed){
-   fire=true;
-   if(mouseX>  monkey.x)left=true;
-   else right=true;
+   if(mouseX<  monkey.x) monkey.x -= player_v_x;
+   else monkey.x += player_v_x;
+   
+   sfxLaser.stop();
+    sfxLaser.cue(0);
+    sfxLaser.play();
+    Projectile newProj = new Projectile("laser1",1,10,41);
+    newProj.x = monkey.x+20;
+    newProj.y = monkey.y - monkey.h/2;
+    newProj.w = player_shot_w;
+    newProj.h = player_shot_h;
+    newProj.v_x = player_shot_v_x;
+    newProj.v_y = player_shot_v_y;
+    newProj.drawMode = CENTER;
+    projectileList.add(newProj);
   }
   // Act on latest recorded button states (smooth movement guaranteed)
   if (up) monkey.y -= player_v_y;
