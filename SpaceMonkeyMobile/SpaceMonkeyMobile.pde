@@ -117,8 +117,12 @@ void draw()
   }
   
   // make the game progressively harder
+  if(seconds<10){
+    enemy_maxCount = 0;
+    asteroids_maxCount = 4;
+  }
   if(seconds>10){
-    enemy_maxCount = 2;
+    enemy_maxCount = 1;
     asteroids_maxCount = 4;
   }
   if(seconds>25){
