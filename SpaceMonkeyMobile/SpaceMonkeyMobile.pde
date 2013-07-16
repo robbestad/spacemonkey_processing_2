@@ -118,7 +118,7 @@ void draw()
   
   // make the game progressively harder
   if(seconds<10){
-    enemy_maxCount = 0;
+    enemy_maxCount = 1;
     asteroids_maxCount = 4;
   }
   if(seconds>10){
@@ -341,7 +341,7 @@ void draw()
         newEnemy.tx = random(0, TWO_PI);
         newEnemy.v_y = enemy_v_y;
         enemyList.add(newEnemy);
-
+  if(enemy_maxCount>1){
         randomx=widthdist[arraynum--];
         enemy_lastSpawnTime = enemy_spawnDelay;
         Enemy newEnemy2 = new Enemy("alien2");
@@ -356,7 +356,7 @@ void draw()
         newEnemy2.tx = random(0, TWO_PI);
         newEnemy2.v_y = enemy_v_y;
         enemyList.add(newEnemy2);
-      
+  }
       }
       else
         enemy_lastSpawnTime -= 1000/fr;
