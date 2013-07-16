@@ -4,7 +4,7 @@ void setup()
   size(320,420);
   noStroke();
   noSmooth();
-  
+/*  
   maxim = new Maxim(this);
   musicPlayer = maxim.loadFile("standoff.wav");
   
@@ -22,7 +22,7 @@ void setup()
   
   sfxPickup=maxim.loadFile("pickup.wav");
   sfxPickup.setLooping(false);
-
+*/
   bgdead = loadImage("bgdeadm.png");
   bgstart = loadImage("bgstartm.png");
   
@@ -146,7 +146,7 @@ void draw()
   
   coolDown-=7;
     
-  musicPlayer.play();
+  //musicPlayer.play();
   pushMatrix();
    parallax(stars, pos_stars, vel_stars, direction);
    parallax(dust, pos_dust, vel_dust, direction);
@@ -180,9 +180,11 @@ void draw()
 
   // LASER SHOTS
   if (savedFire && !lastSavedFire && health > 0) {
+    /*
     sfxLaser.stop();
     sfxLaser.cue(0);
     sfxLaser.play();
+    */
     Projectile newProj = new Projectile("laser1",1,10,41);
     newProj.x = monkey.x+20;
     newProj.y = monkey.y - monkey.h/2;
@@ -368,10 +370,12 @@ void draw()
     Banana banana = bananaList.get(i);
     if (checkHit(banana, monkey)) {
       if (health > 0) {
+        /*
         sfxPickup.stop();
         sfxPickup.cue(0);
 
         sfxPickup.play();
+        */
         health += bonusHealth;
         killCount+=50;
         if (health > 100) health = 100;
@@ -386,9 +390,11 @@ void draw()
       if (health > 0) {
         Explosion newExplosion = new Explosion("explosion",16,64,64,asteroid.x,asteroid.y-50);
         explosionList.add(newExplosion);
+        /*
         sfxExplode.stop();
         sfxExplode.cue(0);
         sfxExplode.play();
+        */
         health -= enemy_damage*1.3;
         asteroidList.remove(i--);
         continue;
@@ -403,9 +409,11 @@ void draw()
     if (checkHit(enemy, monkey)) {
         Explosion newExplosion = new Explosion("explosion",16,64,64,monkey.x,monkey.y-15);
         explosionList.add(newExplosion);
+        /*
         sfxExplode.stop();
         sfxExplode.cue(0);
         sfxExplode.play();
+        */
       if (health > 0) {
         health -= enemy_damage;
         enemyList.remove(i--);
@@ -416,9 +424,11 @@ void draw()
     for (int j = 0; j < projectileList.size(); j++) {
       Projectile proj = projectileList.get(j);
       if (checkHit(proj, enemy) && !skipcheck) {
+        /*
         sfxExplode.stop();
         sfxExplode.cue(0);
         sfxExplode.play();
+        */
         Explosion newExplosion = new Explosion("explosion",16,64,64,proj.x,proj.y-50);
         explosionList.add(newExplosion);
         enemyList.remove(i--);
@@ -440,14 +450,18 @@ void draw()
       if(health<0) {
         Explosion newExplosion = new Explosion("explosion",16,64,64,proj.x,proj.y-50);
         explosionList.add(newExplosion);  
+        /*
         sfxExplode.stop();
         sfxExplode.cue(0);
         sfxExplode.play();
+        */
       }
       else {
+        /*
         sfxExplodeSmall.stop();
         sfxExplodeSmall.cue(0);
         sfxExplodeSmall.play();
+        */
         Dusthit newHit = new Dusthit("dust",8,64,64,proj.x-20,proj.y-20);
         dustList.add(newHit);
       }
@@ -469,15 +483,19 @@ void draw()
           asteroidList.remove(i--);
           Explosion newExplosion = new Explosion("explosion",16,64,64,proj.x,proj.y-50);
           explosionList.add(newExplosion);  
+          /*
           sfxExplode.stop();
           sfxExplode.cue(0);
           sfxExplode.play();
+          */
           killCount+=150;
         }
         else {
+          /*
           sfxExplodeSmall.stop();
           sfxExplodeSmall.cue(0);
           sfxExplodeSmall.play();
+          */
           Dusthit newHit = new Dusthit("dust",8,64,64,proj.x-20,proj.y-20);
           dustList.add(newHit);
         }
