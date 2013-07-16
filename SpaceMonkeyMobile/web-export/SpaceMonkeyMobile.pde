@@ -715,6 +715,8 @@ void changeSpeed() {
 
 //Checks to see if the two sprites are overlapping
 boolean checkHit(Sprites a, Sprites b) {
+  if(undefined==a) return;
+  if(undefined==b) return;
   int a_x0, a_x1, a_y0, a_y1;
   int b_x0, b_x1, b_y0, b_y1;
   if (a.drawMode == CORNER) {
