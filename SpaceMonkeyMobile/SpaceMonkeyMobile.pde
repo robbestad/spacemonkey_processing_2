@@ -584,7 +584,7 @@ for (int i = 0; i < enemyList.size(); i++) {
     
     rectMode(CORNER);
       fill(button_over_color);
-      if (mousePressed) {
+      if (mousePressed && mouseY < 100 ) {
         // RESET IMPORTANT VARIABLES
         seconds=0;
         health = 100;
