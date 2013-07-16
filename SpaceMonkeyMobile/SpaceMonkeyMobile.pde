@@ -681,7 +681,7 @@ for (int i = 0; i < enemyList.size(); i++) {
 }
 
 void parallax(PImage img, PVector pos, PVector vel, String direction) {
-  /*
+  
  if(direction=="up"){
   if (pos.y> 0) image(img, 0, pos.y);
   if (pos.y+img.height < height) image(img, 0, pos.y+img.height);
@@ -698,7 +698,7 @@ void parallax(PImage img, PVector pos, PVector vel, String direction) {
   if (pos.y >= img.height) pos.y -= img.height;
  }   
  
- */
+ 
 }
 
 void changeSpeed() {
