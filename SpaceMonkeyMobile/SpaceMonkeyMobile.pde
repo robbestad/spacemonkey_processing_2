@@ -154,7 +154,7 @@ void draw()
    if(mouseX<  monkey.x) monkey.x -= player_v_x;
    else monkey.x += player_v_x;
    
-   fire=true;
+   savedFire=true;
   }
   // Act on latest recorded button states (smooth movement guaranteed)
   if (up) monkey.y -= player_v_y;
