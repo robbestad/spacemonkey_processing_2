@@ -89,7 +89,7 @@ void draw()
       if (mousePressed || fire) {
         // RESET IMPORTANT VARIABLES
         seconds=0;
-        health = 100;
+        health = maxhealth;
         enemyList.clear();
         killCount = 0;
         delaySpawn = true;
@@ -378,7 +378,7 @@ void draw()
         */
         health += bonusHealth;
         killCount+=50;
-        if (health > 100) health = 100;
+        if (health > 100) health = maxhealth;
         bananaList[i] = new PImage[0];
         bananaList.remove(i--);
         continue;
@@ -641,7 +641,7 @@ for (int i = 0; i < enemyList.size(); i++) {
       if (mousePressed && mouseY < 100 ) {
         // RESET IMPORTANT VARIABLES
         seconds=0;
-        health = 100;
+        health = maxhealth;
         enemyList.clear();
         killCount = 0;
         delaySpawn = true;
@@ -1147,7 +1147,8 @@ final int health_x = 2;
 final int health_y = game_h - health_h - 2;
 final int health_max = 100;
 final color health_c = #0011FF;
-int health = 10000;
+int health = 100;
+final int maxhealth = 10000;
 
 //Enemy properties
 final int enemy_w = 64;
