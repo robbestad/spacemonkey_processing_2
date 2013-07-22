@@ -45,8 +45,10 @@ final int player_x = game_w/2;
 final int player_y = (8*game_h)/10; 
 final int player_x_min = 10;
 final int player_x_max = (8*game_w)/10;
-final int player_y_min = (2*game_h)/3;
+//final int player_y_min = (2*game_h)/3;
+final int player_y_min = 100;
 final int player_y_max = (8*game_h)/11;
+
 final int player_v_x = 3, player_v_y = 2;
 final color player_c = #00FFFF;
 

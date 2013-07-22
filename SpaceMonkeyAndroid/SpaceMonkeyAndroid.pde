@@ -87,7 +87,7 @@ void draw()
   
   background(0);
   if(!game_started){
-    //background(bgstart);
+    background(bgstart);
      
 
     rectMode(CORNER);
@@ -639,7 +639,7 @@ for (int i = 0; i < enemyList.size(); i++) {
   textAlign(LEFT);
   fill(#00FF00);
   text("Health: " + Math.round(health), 15, 13);
-  text("Score: " + killCount, width-30, 13);
+  text("Score: " + killCount, width-75, 13);
   
   noStroke();
   rectMode(CORNER);
@@ -656,7 +656,7 @@ for (int i = 0; i < enemyList.size(); i++) {
     
     rectMode(CORNER);
       fill(button_over_color);
-      if (mousePressed && mouseY < 100 ) {
+      if (mousePressed && (mouseY < startbox_y1+20 && mouseY > startbox_y1-100)) {
         // RESET IMPORTANT VARIABLES
         seconds=0;
         health = maxhealth;
@@ -682,20 +682,22 @@ for (int i = 0; i < enemyList.size(); i++) {
         
       }
     else 
-    textAlign(CENTER);
-    //text("... after only "+seconds+" seconds", button_x0, button_y0+18, button_w, button_h);
-    ellipse(button_x0+100, 25, button_w, button_h+5);
-    rect(button_x0, 0, button_w, button_h-37);
-    
+ 
+    fill(button_idle_color);    
+    ellipse(button_x0+100, startbox_y1-3, button_w, button_h+10);
     fill(#000000);
     textAlign(CENTER);
-    text("Oh no, you died...", button_x0, 2, button_w, button_h);
-    text("Final score: "+killCount, button_x0, 17, button_w, button_h);
-    text("Tap here to try again", button_x0, 32, button_w, button_h);
+    text("Oh no, you died...", button_x0, startbox_y1-30, button_w, button_h);
+    text("Final score: "+killCount, button_x0, startbox_y1-15, button_w, button_h);
+    text("Tap here to try again", button_x0, startbox_y1, button_w, button_h);
+    
+
     
     }
 
 }
+
+
 
 void accelerationEvent(float x, float y, float z) {
   ax = x;  
