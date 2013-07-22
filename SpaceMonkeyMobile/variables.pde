@@ -12,6 +12,11 @@ AudioPlayer sfxPickup;
 // first run
 boolean game_started=false;
 
+// debug
+boolean debug=false;
+
+
+
 // Timer
 int frTimer=0; // counts seconds based on framerate
 int seconds=0; // updates by 1 foreach framerate run

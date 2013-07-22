@@ -408,6 +408,7 @@ void draw()
   
 
   boolean skipcheck=false;
+  boolean enemyRemoved=false;
   for (int i = 0; i < enemyList.size(); i++) {
     Enemy enemy = enemyList.get(i);
     if (checkHit(enemy, monkey)) {
@@ -420,7 +421,9 @@ void draw()
         */
       if (health > 0) {
         health -= enemy_damage;
-        enemyList[i] = new PImage[0];
+        //enemyList[i] = new PImage[0];
+        if(debug) println("remove enemy");
+
         enemyList.remove(i--);
         skipcheck=true;
         continue;
@@ -436,13 +439,19 @@ void draw()
         */
         Explosion newExplosion = new Explosion("explosion",16,64,64,proj.x,proj.y-50);
         explosionList.add(newExplosion);
-        enemyList[i] = new PImage[0];
-        projectileList[i] = new PImage[0];
-        
-        enemyList.remove(i--);
+        //enemyList[i] = new PImage[0];
+        //projectileList[i] = new PImage[0];
+        if(debug) println("remove enemy & projectile");
+
+        if(!enemyRemoved){
+          // only remove once
+          enemyList.remove(i--);
+          enemyRemoved=true;
+        }
         projectileList.remove(j--);
         killCount+=250;
       }
+     
     }
   }
 
@@ -1113,6 +1122,11 @@ AudioPlayer sfxPickup;
 
 // first run
 boolean game_started=false;
+
+// debug
+boolean debug=false;
+
+
 
 // Timer
 int frTimer=0; // counts seconds based on framerate

@@ -6,6 +6,9 @@ AudioPlayer sfxExplode;
 AudioPlayer sfxExplodeSmall;
 AudioPlayer sfxPickup;
 
+// debug
+boolean debug=false;
+
 
 // first run
 boolean game_started=false;
